@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Amoolya Suresh Babu — Portfolio</title>
+  <meta name="description" content="Amoolya Suresh Babu — Development • Product • Data." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --serif: "Playfair Display", serif;
+      --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      /* Light */
+      --bg0: #ffffff;
+      --bg1: #fbfbfd;
+      --ink: #0b0b0b;
+      --muted: rgba(11,11,11,.62);
+
+      --panel: rgba(255,255,255,.92);
+      --soft: rgba(11,11,11,.04);
+      --stroke: rgba(11,11,11,.10);
+
+      /* Accent (was blue) -> BROWN */
+      --blue: #7a5a3a;                 /* elegant brown */
+      --blueSoft: rgba(122,90,58,.16);
+
+      --shadow: 0 22px 60px rgba(0,0,0,.10);
+      --shadow2: 0 12px 34px rgba(0,0,0,.08);
+
+      --r: 22px;
+      --max: 1120px;
+
+      --ease: cubic-bezier(.2,.85,.2,1);
+      --dur: 220ms;
+      --dur2: 560ms;
+
+      --ring: 0 0 0 4px var(--blueSoft);
+    }
+
+    [data-theme="dark"]{
+      --bg0: #0b0d14;
+      --bg1: #0f1220;
+      --ink: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+
+      --panel: rgba(255,255,255,.06);
+      --soft: rgba(255,255,255,.07);
+      --stroke: rgba(255,255,255,.12);
+
+      --shadow: 0 22px 70px rgba(0,0,0,.58);
+      --shadow2: 0 12px 38px rgba(0,0,0,.46);
+
+      --ring: 0 0 0 4px rgba(122,90,58,.20);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max),92vw);margin:0 auto}
+    :focus-visible{outline:none;box-shadow:var(--ring);border-radius:14px}
+    ::selection{background: var(--blueSoft)}
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{transition:none!important;animation:none!important}
+    }
+
+    /* subtle grain */
+    .grain{
+      position:fixed; inset:0;
+      pointer-events:none; z-index:0;
+      opacity:.035;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="140" height="140" filter="url(%23n)" opacity=".25"/></svg>');
+      mix-blend-mode: overlay;
+    }
+
+    /* Header / Nav */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: color-mix(in srgb, var(--bg0) 88%, transparent);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0; gap:14px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      text-decoration:none;
+      min-width: 260px;
+    }
+    .brandTitle{
+      font-family: var(--serif);
+      font-weight:600;
+      letter-spacing:.2px;
+      font-size:18px;
+      line-height:1.1;
+    }
+    .brandMeta{
+      color:var(--muted);
+      font-size:12px;
+      margin-left:8px;
+      font-family: var(--sans);
+      font-weight:600;
+    }
+    nav.links{display:flex;align-items:center;gap:8px}
+    .link{
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius: 14px;
+      border:1px solid transparent;
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+      transition: background var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease),
+                 color var(--dur) var(--ease),
+                 transform var(--dur) var(--ease);
+      white-space:nowrap;
+    }
+    .link:hover{
+      background: var(--soft);
+      border-color: var(--stroke);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+    .link.active{
+      background: var(--panel);
+      border-color: var(--stroke);
+      color: var(--ink);
+      box-shadow: var(--shadow2);
+    }
+    .right{display:flex;align-items:center;gap:10px}
+    .iconBtn{
+      height:42px;width:42px;
+      border-radius: 14px;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      display:grid;place-items:center;
+      transition: transform var(--dur) var(--ease),
+                 box-shadow var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease);
+    }
+    .iconBtn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: color-mix(in srgb, var(--blue) 22%, var(--stroke));
+    }
+
+    .menu{
+      display:none;
+      width:44px;height:42px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .menu:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+    .burger{width:18px;margin:0 auto}
+    .burger span{display:block;height:2px;background:var(--ink);border-radius:999px;margin:4px 0;opacity:.85}
+
+    .drawer{
+      display:none;
+      position:absolute; right:4vw; top:72px;
+      width:min(360px,92vw);
+      padding:10px;
+      border-radius: 16px;
+      border:1px solid var(--stroke);
+      background: color-mix(in srgb, var(--bg0) 92%, transparent);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+    .drawer.open{display:block}
+    .drawer a{
+      display:block;
+      text-decoration:none;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid transparent;
+      color: var(--muted);
+      font-weight:650;
+      transition: background var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease),
+                 color var(--dur) var(--ease);
+    }
+    .drawer a:hover{background:var(--soft);border-color:var(--stroke);color:var(--ink)}
+
+    /* Sections (reduced whitespace) */
+    main{position:relative;z-index:1}
+    section{padding:64px 0}
+    .hero{padding-top:54px}
+
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 24px;
+      align-items:start;
+    }
+
+    h1{
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(44px, 4.8vw, 68px);
+      line-height: 1.02;
+      margin: 10px 0 12px;
+      letter-spacing: .2px;
+    }
+
+    .blue{
+      color: var(--blue);
+      display:inline-block;
+      position:relative;
+    }
+    
+
+    .lead{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size: 15.5px;
+      line-height: 1.75;
+      max-width: 72ch;
+    }
+
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0 16px}
+
+    .btn{
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      border-radius: 14px;
+      padding:12px 16px;
+      text-decoration:none;
+      display:inline-flex;align-items:center;gap:10px;
+      font-weight:800;
+      font-size:13px;
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      transition: transform var(--dur) var(--ease),
+                 box-shadow var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease);
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: color-mix(in srgb, var(--blue) 22%, var(--stroke));
+    }
+    .btn.primary{
+      background:#0b0b0b;
+      color:#fff;
+      border-color:#0b0b0b;
+    }
+    [data-theme="dark"] .btn.primary{
+      background:#fff;
+      color:#0b0b0b;
+      border-color:#fff;
+    }
+
+    /* Accent button (Resume) */
+    .btn.blue{
+      background: var(--blue);
+      color:#fff;
+      border-color: var(--blue);
+    }
+    .btn.blue:hover{
+      border-color: var(--blue);
+      box-shadow: var(--shadow);
+    }
+    [data-theme="dark"] .btn.blue{
+      background: var(--blue);
+      color:#fff;
+      border-color: var(--blue);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .stat{
+      border:1px solid var(--stroke);
+      border-radius: 16px;
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      padding: 14px 14px;
+    }
+    .stat small{display:block;color:var(--muted);font-size:12px;font-weight:700}
+    .stat b{display:block;margin-top:6px;font-size:13px;font-weight:900}
+
+    .sideCard{
+      border:1px solid var(--stroke);
+      border-radius: var(--r);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .sideCard::before{
+      content:"";
+      position:absolute;
+      left:16px; right:16px; top:14px;
+      height:3px;
+      background: var(--blue);
+      border-radius:999px;
+      opacity:.9;
+    }
+    .photo{padding: 18px 16px 12px}
+    .photo img{
+      width:100%;
+      height: 460px;
+      object-fit: cover;
+      border-radius: 18px;
+      border:1px solid var(--stroke);
+      background: var(--soft);
+    }
+    .sidePad{padding: 10px 16px 16px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{
+      padding:9px 12px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      text-decoration:none;
+      transition: transform var(--dur) var(--ease),
+                 background var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease),
+                 color var(--dur) var(--ease);
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: var(--panel);
+      color: var(--ink);
+      border-color: color-mix(in srgb, var(--blue) 22%, var(--stroke));
+    }
+
+    .secHead{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      gap:14px;margin-bottom:18px;
+    }
+    .secHead h2{
+      margin:0;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 44px;
+      letter-spacing:.2px;
+    }
+    .secHead p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 13.5px;
+      max-width: 70ch;
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 10px 12px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      white-space:nowrap;
+      box-shadow: var(--shadow2);
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px var(--blueSoft);
+    }
+
+    .grid2{display:grid;grid-template-columns: 1fr 1fr;gap:16px}
+    .grid3{display:grid;grid-template-columns: repeat(3,1fr);gap:16px}
+
+    .panel{
+      border:1px solid var(--stroke);
+      border-radius: var(--r);
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::after{
+      content:"";
+      position:absolute;
+      right:-22px; top:-22px;
+      width: 96px; height: 96px;
+      background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--blue) 28%, transparent), transparent 62%);
+      border-radius: 26px;
+      transform: rotate(10deg);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .panel h3{
+      margin:0 0 10px;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 26px;
+    }
+    .panel p{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 13.5px;
+    }
+
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 13.5px;
+    }
+    .tagRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .tag{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .divider{height:1px;background:var(--stroke);margin:14px 0}
+
+    /* Timeline */
+    .timeline{display:grid;gap:14px}
+    .tItem{display:grid;grid-template-columns: 14px 1fr;gap:12px;align-items:start}
+    .tDot{
+      width:10px;height:10px;border-radius:999px;background:var(--blue);
+      margin-top: 26px;
+      box-shadow: 0 0 0 4px var(--blueSoft);
+    }
+    .tCard{
+      border:1px solid var(--stroke);
+      border-radius: var(--r);
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      padding: 16px 18px;
+    }
+    .tTop{
+      display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
+      align-items:baseline;
+      margin-bottom: 8px;
+    }
+    .role{margin:0;font-family: var(--serif);font-weight:600;font-size:22px}
+    .time{
+      font-size: 12px;
+      color: var(--muted);
+      border:1px solid var(--stroke);
+      background: var(--soft);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 850;
+      white-space:nowrap;
+    }
+
+    /* Projects */
+    .proj{display:flex;flex-direction:column;gap:10px;min-height: 240px}
+    .projHead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:baseline}
+    .proj h3{margin:0;font-family:var(--serif);font-weight:600;font-size:22px}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .aBtn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      text-decoration:none;
+      font-weight: 900;
+      font-size: 13px;
+      transition: transform var(--dur) var(--ease),
+                 box-shadow var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease);
+    }
+    .aBtn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: color-mix(in srgb, var(--blue) 22%, var(--stroke));
+    }
+    .aBtn small{color:var(--muted);font-weight:850}
+
+    /* Contact */
+    .contactGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .cItem{
+      display:flex;justify-content:space-between;gap:14px;
+      padding:12px 14px;
+      border-radius: 18px;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow2);
+      text-decoration:none;
+      transition: transform var(--dur) var(--ease),
+                 box-shadow var(--dur) var(--ease),
+                 border-color var(--dur) var(--ease);
+    }
+    .cItem:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: color-mix(in srgb, var(--blue) 22%, var(--stroke));
+    }
+    .lbl{display:block;color:var(--muted);font-size:12px;font-weight:850}
+    .val{display:block;font-weight:950;font-size:13px}
+    .arr{color:var(--muted);font-weight:950}
+
+    footer{
+      padding: 34px 0 46px;
+      border-top:1px solid var(--stroke);
+      color:var(--muted);
+      text-align:center;
+      font-size: 13px;
+      background: color-mix(in srgb, var(--bg0) 90%, transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(14px);transition: opacity var(--dur2) var(--ease), transform var(--dur2) var(--ease)}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    /* Back to top */
+    .topBtn{
+      position:fixed; right:16px; bottom:16px; z-index:80;
+      display:none;
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      border-radius: 16px;
+      height:46px;
+      padding:0 14px;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      font-weight:900;
+      transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .topBtn:hover{transform:translateY(-2px);border-color: color-mix(in srgb, var(--blue) 22%, var(--stroke))}
+    .topBtn.show{display:inline-flex;align-items:center;gap:10px}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .contactGrid{grid-template-columns:1fr}
+      .photo img{height: 420px}
+      .secHead h2{font-size: 38px}
+    }
+    @media (max-width: 820px){
+      nav.links{display:none}
+      .menu{display:inline-flex;align-items:center;justify-content:center}
+      .brandTitle{font-size:16px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#home" aria-label="Go to top">
+          <span class="brandTitle">Amoolya Suresh Babu</span>
+        </a>
+
+        <nav class="links" aria-label="Primary navigation">
+          <a class="link" href="#about">About</a>
+          <a class="link" href="#skills">Skills</a>
+          <a class="link" href="#experience">Experience</a>
+          <a class="link" href="#projects">Projects</a>
+          <a class="link" href="#certs">Certifications</a>
+          <a class="link" href="#extras">Extras</a>
+          <a class="link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="right">
+          <button class="iconBtn" id="themeBtn" type="button" aria-label="Toggle theme">
+            <span id="themeIcon" aria-hidden="true">🌙</span>
+          </button>
+
+          <button class="menu" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+            <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+          </button>
+
+          <div class="drawer" id="drawer" aria-label="Mobile menu">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#certs">Certifications</a>
+            <a href="#extras">Extras</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container heroGrid">
+        <div class="reveal">
+          <h1>Hello, I’m <span class="blue">Amoolya</span> Suresh Babu.</h1>
+
+          <p class="lead">
+            Master’s student in Information Science with a Bachelor’s in Computer Science and nearly 2 years of experience as an Implementation Engineer and Software Engineer. Skilled in Python, Java, SQL, HTML, CSS, and JavaScript. Seeking entry-level roles in Software Development or Product Management to build scalable, user-focused solutions.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn blue" href="Amoolya_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            <a class="btn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><small>Based in</small><b>Denton, TX</b></div>
+            <div class="stat"><small>Open to</small><b>Development & Product</b></div>
+            <div class="stat"><small>Also exploring</small><b>Data Analytics</b></div>
+          </div>
+        </div>
+
+        <aside class="sideCard reveal">
+          <div class="photo">
+            <!-- Put profile.jpg in the same folder as index.html -->
+            <img src="profile.jpg" alt="Portrait photo of Amoolya" />
+          </div>
+          <div class="sidePad">
+            <div class="chips">
+              <a class="chip" href="mailto:amoolya.s0811@gmail.com">Email</a>
+              <a class="chip" href="https://www.linkedin.com/in/amoolya-s-8730351ba/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="chip" href="Amoolya_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Profile</h2>
+          </div>
+          <div class="badge"><span class="dot"></span> Know about me</div>
+        </div>
+
+        <div class="grid2">
+          <div class="panel reveal">
+            <h3>About me</h3>
+            <p>
+              I enjoy building things that are useful and easy to use. I’m comfortable across development and product work,
+              and I like using data to make better decisions and improvements.
+            </p>
+
+            <ul class="list">
+              <li><b>Approach:</b> I like to keep things simple and easy to use</li>
+              <li><b>Strength:</b> I turn ideas into working features</li>
+              <li><b>Focus:</b> development, product, and data work</li>
+            </ul>
+
+            <div class="tagRow">
+              <span class="tag">Quick learner</span>
+              <span class="tag">Clear communicator</span>
+              <span class="tag">Detail focused</span>
+              <span class="tag">I take ownership</span>
+            </div>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Education</h3>
+            <ul class="list" style="margin-top:0">
+              <li><b>M.S. Information Science</b> - University of North Texas (Aug 2024 - May 2026)</li>
+              <li><b>B.S. Computer Science Engineering</b> - Dayananda Sagar University (Aug 2019 - Apr 2023)</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h3 style="margin-top:0">Links</h3>
+            <div class="actions">
+              <a class="aBtn" href="Amoolya_Resume.pdf" target="_blank" rel="noreferrer">Resume <small>PDF</small></a>
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub <small>repos</small></a>
+              <a class="aBtn" href="https://www.linkedin.com/in/amoolya-s-8730351ba/" target="_blank" rel="noreferrer">LinkedIn <small>profile</small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Skills</h2>
+          </div>
+          <div class="badge"><span class="dot"></span> What I know</div>
+        </div>
+
+        <div class="grid3">
+          <div class="panel reveal">
+            <h3>Programming</h3>
+            <div class="tagRow">
+              <span class="tag">Python</span>
+              <span class="tag">Java</span>
+              <span class="tag">SQL</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">C</span>
+              <span class="tag">C++</span>
+              <span class="tag">C#</span>
+            </div>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Data</h3>
+            <div class="tagRow">
+              <span class="tag">MySQL</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">Tableau</span>
+              <span class="tag">Excel</span>
+              <span class="tag">Data visualization</span>
+            </div>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Tools</h3>
+            <div class="tagRow">
+              <span class="tag">Git</span>
+              <span class="tag">GitHub</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Linux/Unix</span>
+              <span class="tag">Jira</span>
+              <span class="tag">Figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Experience</h2>
+           
+          </div>
+          <div class="badge"><span class="dot"></span> My Experience</div>
+        </div>
+
+        <div class="timeline">
+          <div class="tItem reveal">
+            <div class="tDot"></div>
+            <div class="tCard">
+              <div class="tTop">
+                <p class="role">Graduate Service Assistant, Information Science Department - University of North Texas</p>
+                <span class="time">Jan 2026 - May 2026</span>
+              </div>
+              <ul class="list">
+                <li>Customized department websites using HTML, CSS, and JavaScript.</li>
+                <li>Supported faculty research in Agentic AI and Knowledge Management.</li>
+                <li>Designed posters/promotional assets and supported departmental outreach.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tItem reveal">
+            <div class="tDot"></div>
+            <div class="tCard">
+              <div class="tTop">
+                <p class="role">Software Engineer Intern - Best Automation & Robotics</p>
+                <span class="time">May 2025 – Dec 2025</span>
+              </div>
+              <ul class="list">
+                <li>Built Python automation: SCADA → MySQL → formatted outputs → Zebra printing.</li>
+                <li>Worked on UI components and functional integrations for medical equipment.</li>
+                <li>Implemented control logic (C++/Linux/Raspberry Pi) for hardware workflows.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tItem reveal">
+            <div class="tDot"></div>
+            <div class="tCard">
+              <div class="tTop">
+                <p class="role">Associate Implementation Engineer - E2open</p>
+                <span class="time">Jul 2023 – Aug 2024</span>
+              </div>
+              <ul class="list">
+                <li>Developed/customized trade automation applications using Java and SQL.</li>
+                <li>Contributed to feature development; improved UI components with JavaScript.</li>
+                <li>Implemented APIs and resolved issues in Agile teams using Jira & Git.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (with bullet points) -->
+    <section id="projects">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Projects</h2>
+          
+          </div>
+          <div class="badge"><span class="dot"></span> Selected work</div>
+        </div>
+
+        <div class="grid3">
+          <div class="panel proj reveal">
+            <div class="projHead">
+              <h3>Music Recommendation System</h3>
+              <span class="time">Python</span>
+            </div>
+            <p>Content-based recommendation using similarity scoring.</p>
+            <ul class="list" style="margin-top:6px">
+              <li>Built recommendations using cosine similarity</li>
+              <li>Cleaned and prepared data for better matching</li>
+              <li>Generated ranked suggestions based on user input</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">Similarity</span>
+            </div>
+            <div class="actions">
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub <small>repos</small></a>
+            </div>
+          </div>
+
+          <div class="panel proj reveal">
+            <div class="projHead">
+              <h3>AI Proctoring System</h3>
+              <span class="time">OpenCV</span>
+            </div>
+            <p>Exam monitoring workflow using computer vision.</p>
+            <ul class="list" style="margin-top:6px">
+              <li>Detected face presence and multiple-person cases</li>
+              <li>Tracked suspicious movements and activity patterns</li>
+              <li>Designed a simple pipeline for real-time monitoring</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">OpenCV</span><span class="tag">TensorFlow</span><span class="tag">Detection</span>
+            </div>
+            <div class="actions">
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub <small>repos</small></a>
+            </div>
+          </div>
+
+          <div class="panel proj reveal">
+            <div class="projHead">
+              <h3>Face Mask Detection</h3>
+              <span class="time">TensorFlow</span>
+            </div>
+            <p>Real-time mask detection using a CNN model.</p>
+            <ul class="list" style="margin-top:6px">
+              <li>Trained a CNN model on labeled image data</li>
+              <li>Ran live detection using OpenCV video feed</li>
+              <li>Tested accuracy and improved model performance</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">CNN</span>
+            </div>
+            <div class="actions">
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub <small>repos</small></a>
+            </div>
+          </div>
+
+          <div class="panel proj reveal">
+            <div class="projHead">
+              <h3>Responsive E-Commerce Website</h3>
+              <span class="time">Front-end</span>
+            </div>
+            <p>Modern responsive layout with clean UI.</p>
+            <ul class="list" style="margin-top:6px">
+              <li>Built responsive pages for mobile + desktop</li>
+              <li>Created product cards and layout structure</li>
+              <li>Improved navigation and user flow</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            </div>
+            <div class="actions">
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub <small>repos</small></a>
+            </div>
+          </div>
+
+          <div class="panel proj reveal">
+            <div class="projHead">
+              <h3>SCADA → MySQL → Label Printing</h3>
+              <span class="time">Automation</span>
+            </div>
+            <p>Automated pipeline for data → labels → printing.</p>
+            <ul class="list" style="margin-top:6px">
+              <li>Moved SCADA values into MySQL using Python</li>
+              <li>Formatted output for Zebra label printing</li>
+              <li>Reduced manual steps through automation</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">SCADA</span><span class="tag">MySQL</span><span class="tag">Zebra</span>
+            </div>
+            <div class="actions">
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">GitHub <small>repos</small></a>
+            </div>
+          </div>
+
+          <div class="panel proj reveal">
+            <div class="projHead">
+              <h3>More Projects</h3>
+              <span class="time">Explore</span>
+            </div>
+            <p>More work and code on GitHub.</p>
+            <ul class="list" style="margin-top:6px">
+              <li>Project repos</li>
+              <li>Reports and coursework</li>
+              <li>Experiments and learning projects</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">GitHub</span><span class="tag">Repos</span><span class="tag">More</span>
+            </div>
+            <div class="actions">
+              <a class="aBtn" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">Open GitHub <small>all repos</small></a>
+              <a class="aBtn" href="#contact">Contact <small>quick</small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS (one box only) -->
+    <section id="certs">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Certifications</h2>
+           
+          </div>
+          <div class="badge"><span class="dot"></span> Learning</div>
+        </div>
+
+        <div class="panel reveal">
+          <h3>Certificates & Courses</h3>
+          <ul class="list" style="margin-top:0">
+            <li>IoT Design, Protocols, and Security - Nokia</li>
+            <li>Programming for Everybody (Python) - University of Michigan</li>
+            <li>Front-End Development (HTML & CSS) - Great Learning</li>
+            <li>Python & Machine Learning Bootcamp - ShapeAI</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="tagRow">
+            <span class="tag">Hands-on learning</span>
+            <span class="tag">Always improving</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXTRAS (aligned & complete) -->
+    <section id="extras">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Extras</h2>
+           
+          </div>
+          <div class="badge"><span class="dot"></span> Creative + Leadership</div>
+        </div>
+
+        <div class="grid2">
+          <div class="panel reveal">
+            <h3>Achievements</h3>
+            <ul class="list" style="margin-top:0">
+              <li>Winner of 4 National Awards in Drawing and Painting</li>
+              <li>Competitive swimmer (school-level competitions)</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">Creative</span>
+              <span class="tag">Consistent</span>
+              <span class="tag">Discipline</span>
+            </div>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Leadership & Volunteering</h3>
+            <ul class="list" style="margin-top:0">
+              <li>Cultural Club Student Coordinator - led college events</li>
+              <li>Civil Defense Volunteer (Division 32) - COVID-19 support</li>
+              <li>Pet Fed Volunteer – Assisted in organizing and managing pet welfare events</li>
+              <li>Creative Content Creator - Digital and social media presence</li>
+            </ul>
+            <div class="tagRow">
+              <span class="tag">Ownership</span>
+              <span class="tag">Teamwork</span>
+              <span class="tag">Community</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="secHead reveal">
+          <div>
+            <h2>Contact</h2>
+           
+          </div>
+          <div class="badge"><span class="dot"></span> Direct</div>
+        </div>
+
+        <div class="contactGrid">
+          <a class="cItem reveal" href="mailto:amoolya.s0811@gmail.com">
+            <span><span class="lbl">Email</span><span class="val">amoolya.s0811@gmail.com</span></span>
+            <span class="arr">↗</span>
+          </a>
+
+          <a class="cItem reveal" href="tel:+19405145492">
+            <span><span class="lbl">Phone</span><span class="val">940-514-5492</span></span>
+            <span class="arr">↗</span>
+          </a>
+
+          <a class="cItem reveal" href="https://www.linkedin.com/in/amoolya-s-8730351ba/" target="_blank" rel="noreferrer">
+            <span><span class="lbl">LinkedIn</span><span class="val">amoolya-s-8730351ba</span></span>
+            <span class="arr">↗</span>
+          </a>
+
+          <a class="cItem reveal" href="https://github.com/AmoolyaSuresh08" target="_blank" rel="noreferrer">
+            <span><span class="lbl">GitHub</span><span class="val">AmoolyaSuresh08</span></span>
+            <span class="arr">↗</span>
+          </a>
+
+          <a class="cItem reveal" href="Amoolya_Resume.pdf" target="_blank" rel="noreferrer">
+            <span><span class="lbl">Resume</span><span class="val">Open PDF</span></span>
+            <span class="arr">↗</span>
+          </a>
+
+          <button class="cItem reveal" id="copyEmailBtn" type="button" style="text-align:left">
+            <span><span class="lbl">Copy email</span><span class="val">Click to copy</span></span>
+            <span class="arr">⧉</span>
+          </button>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="grid2">
+          <div class="panel reveal">
+            <h3>Send a message</h3>
+            <p>Opens your email app with a ready message.</p>
+            <div class="divider"></div>
+
+            <a class="btn blue" style="width:100%;justify-content:center"
+               href="mailto:amoolya.s0811@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Amoolya%2C%0A%0AI%20saw%20your%20portfolio%20and%20wanted%20to%20connect.%0A%0AThanks%2C">
+              Email Amoolya
+            </a>
+
+            <div style="height:10px"></div>
+
+            <a class="btn" style="width:100%;justify-content:center"
+               href="mailto:amoolya.s0811@gmail.com?subject=Opportunity&body=Hi%20Amoolya%2C%0A%0AI%27d%20like%20to%20connect%20about%20an%20opportunity.%20Are%20you%20available%20for%20a%20quick%20chat%3F%0A%0AThanks%2C">
+              Quick inquiry
+            </a>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Best way to reach me</h3>
+            <p>Email works best. I usually respond quickly.</p>
+            <div class="divider"></div>
+            <div class="tagRow">
+              <span class="tag">Email preferred</span>
+              <span class="tag">Open to roles</span>
+              <span class="tag">Quick replies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      © <span id="year"></span> Amoolya Suresh Babu
+    </footer>
+  </main>
+
+  <button class="topBtn" id="topBtn" type="button" aria-label="Back to top">↑ Top</button>
+
+  <script>
+    // Theme toggle (persist)
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    const themeIcon = document.getElementById("themeIcon");
+
+    function setTheme(theme){
+      root.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      themeIcon.textContent = (theme === "dark") ? "☀️" : "🌙";
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if(meta) meta.setAttribute("content", theme === "dark" ? "#0b0d14" : "#ffffff");
+    }
+
+    const saved = localStorage.getItem("theme");
+    if(saved){
+      setTheme(saved);
+    } else {
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(prefersDark ? "dark" : "light");
+    }
+
+    themeBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "light";
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const drawer = document.getElementById("drawer");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = drawer.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    drawer.querySelectorAll("a").forEach(a=>{
+      a.addEventListener("click", ()=>{
+        drawer.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded","false");
+      });
+    });
+
+    document.addEventListener("click", (e)=>{
+      const inside = drawer.contains(e.target) || menuBtn.contains(e.target);
+      if(!inside){
+        drawer.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded","false");
+      }
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el=> io.observe(el));
+
+    // Active nav highlight
+    const navLinks = Array.from(document.querySelectorAll('nav.links a.link'));
+    const sections = ["about","skills","experience","projects","certs","extras","contact"]
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id = entry.target.getAttribute("id");
+          navLinks.forEach(a=>{
+            a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+          });
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 });
+
+    sections.forEach(sec => spy.observe(sec));
+
+    // Back to top
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", ()=>{
+      topBtn.classList.toggle("show", window.scrollY > 700);
+    });
+    topBtn.addEventListener("click", ()=> window.scrollTo({ top:0, behavior:"smooth" }));
+
+    // Copy email
+    const copyBtn = document.getElementById("copyEmailBtn");
+    copyBtn.addEventListener("click", async () => {
+      const label = copyBtn.querySelector(".val");
+      try{
+        await navigator.clipboard.writeText("amoolya.s0811@gmail.com");
+        label.textContent = "Copied ✓";
+        setTimeout(()=> label.textContent = "Click to copy", 1300);
+      }catch(e){
+        label.textContent = "Copy failed";
+        setTimeout(()=> label.textContent = "Click to copy", 1300);
+      }
+    });
+
+    // Year
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
